@@ -4,7 +4,7 @@ import com.muratocal.exchange.models.Share;
 
 public interface ShareService {
 
-    Share savShare(Share share);
+    Share saveShare(Share share);
 
     Share getShareById(Long id);
 
