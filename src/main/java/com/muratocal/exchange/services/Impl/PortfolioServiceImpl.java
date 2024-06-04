@@ -17,7 +17,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public Portfolio gePortfolioById(Long id) {
+    public Portfolio getPortfolioById(Long id) {
         return portfolioRepository.findById(id).orElseThrow(() -> new RuntimeException("Portfolio not found."));
     }
 }
