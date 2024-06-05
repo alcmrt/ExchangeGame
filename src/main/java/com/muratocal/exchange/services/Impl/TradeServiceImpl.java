@@ -27,7 +27,7 @@ public class TradeServiceImpl implements TradeService {
 
     @Override
     @Transactional
-    public String buyShare(Long portfolioId, String symbol, Integer quantity) {
+    public Trade buyShare(Long portfolioId, String symbol, Integer quantity) {
 
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
@@ -44,25 +44,25 @@ public class TradeServiceImpl implements TradeService {
         trade.setPortfolio(portfolio);
         trade.setShare(share);
 
-        tradeRepository.save(trade);
+        return tradeRepository.save(trade);
 
-        return "Buy trade executed successfully";
+        // return "Buy trade executed successfully";
     }
 
     @Override
     @Transactional
-    public String sellShare(Long portfolioId, String symbol, Integer quantity) {
+    public Trade sellShare(Long portfolioId, String symbol, Integer quantity) {
 
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
-        
+
         Share share = shareRepository.findSymbol(symbol);
-        if (share == null){
+        if (share == null) {
             throw new RuntimeException("Share not found");
         }
 
         List<Trade> trades = tradeRepository.findByPortfolioAndShare(portfolio, share);
-        
+
         int totalBought = trades.stream().filter(t -> t.getType().equals("BUY")).mapToInt(Trade::getQuantity).sum();
         int totalSold = trades.stream().filter(t -> t.getType().equals("SELL")).mapToInt(Trade::getQuantity).sum();
 
@@ -71,16 +71,22 @@ public class TradeServiceImpl implements TradeService {
         }
 
         Trade trade = new Trade();
-        
+
         trade.setType("SELL");
         trade.setQuantity(quantity);
         trade.setPrice(share.getPrice());
         trade.setPortfolio(portfolio);
         trade.setShare(share);
 
-        tradeRepository.save(trade);
+        return tradeRepository.save(trade);
 
-        return "Sell trade executed successfully";
+        // return "Sell trade executed successfully";
+    }
+
+    @Override
+    public Trade getTradeById(Long id) {
+        return tradeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Trade not found"));
     }
 
 }
