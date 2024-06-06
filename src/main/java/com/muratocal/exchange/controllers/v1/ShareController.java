@@ -3,6 +3,7 @@ package com.muratocal.exchange.controllers.v1;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import com.muratocal.exchange.services.ShareService;
 @RestController
 @RequestMapping("/api/v1/shares")
 public class ShareController {
-    
+
     @Autowired
     private ShareService shareService;
 
@@ -41,8 +42,13 @@ public class ShareController {
     }
 
     @GetMapping("/symbol/{symbol}")
-    public ResponseEntity<Share> getShareBySymbol(@PathVariable String symbol) {
-        Share share = shareService.getShareBySymbol(symbol);
-        return ResponseEntity.ok(share);
+    public ResponseEntity<?> getShareBySymbol(@PathVariable String symbol) {
+
+        try {
+            Share share = shareService.getShareBySymbol(symbol);
+            return ResponseEntity.ok(share);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }

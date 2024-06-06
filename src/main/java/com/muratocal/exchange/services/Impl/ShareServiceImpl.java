@@ -37,7 +37,12 @@ public class ShareServiceImpl implements ShareService {
 
     @Override
     public Share getShareBySymbol(String symbol) {
-        return null;
-        // return shareRepository.findSymbol(symbol);
+
+        Share share = shareRepository.findBySymbol(symbol);
+        if (share == null) {
+            throw new RuntimeException("Share not found");
+        }
+
+        return share;
     }
 }
