@@ -5,9 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
 @Entity
+//@Table(name = "app_user")
 public class User {
 
     @Id
@@ -17,7 +19,6 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Portfolio portfolio;
-
 
     public String getName() {
         return name;

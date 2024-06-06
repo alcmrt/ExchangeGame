@@ -7,5 +7,5 @@ import com.muratocal.exchange.models.Share;
 
 @Repository
 public interface ShareRepository extends JpaRepository<Share, Long> {
-    Share findSymbol(String symbol);
+    // Share findSymbol(String symbol);
 }

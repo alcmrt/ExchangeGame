@@ -1,11 +1,13 @@
 package com.muratocal.exchange.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.muratocal.exchange.models.User;
 import com.muratocal.exchange.repositories.UserRepository;
 import com.muratocal.exchange.services.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired

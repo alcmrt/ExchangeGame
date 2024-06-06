@@ -1,11 +1,13 @@
 package com.muratocal.exchange.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.muratocal.exchange.models.Share;
 import com.muratocal.exchange.repositories.ShareRepository;
 import com.muratocal.exchange.services.ShareService;
 
+@Service
 public class ShareServiceImpl implements ShareService {
 
     @Autowired
@@ -23,6 +25,7 @@ public class ShareServiceImpl implements ShareService {
 
     @Override
     public Share getShareBySymbol(String symbol) {
-        return shareRepository.findSymbol(symbol);
+        return null;
+        //return shareRepository.findSymbol(symbol);
     }
 }

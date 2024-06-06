@@ -48,5 +48,4 @@ public class Portfolio {
         this.trades = trades;
     }
 
-    
 }

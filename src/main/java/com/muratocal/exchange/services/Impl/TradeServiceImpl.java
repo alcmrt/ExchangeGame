@@ -3,6 +3,7 @@ package com.muratocal.exchange.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.muratocal.exchange.models.Portfolio;
 import com.muratocal.exchange.models.Share;
@@ -14,6 +15,7 @@ import com.muratocal.exchange.services.TradeService;
 
 import jakarta.transaction.Transactional;
 
+@Service
 public class TradeServiceImpl implements TradeService {
 
     @Autowired
@@ -32,7 +34,8 @@ public class TradeServiceImpl implements TradeService {
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
 
-        Share share = shareRepository.findSymbol(symbol);
+        // Share share = shareRepository.findSymbol(symbol);
+        Share share = null;
 
         if (share == null) {
             throw new RuntimeException("Share not found");
@@ -56,7 +59,9 @@ public class TradeServiceImpl implements TradeService {
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
 
-        Share share = shareRepository.findSymbol(symbol);
+        // Share share = shareRepository.findSymbol(symbol);
+        Share share = null;
+
         if (share == null) {
             throw new RuntimeException("Share not found");
         }
