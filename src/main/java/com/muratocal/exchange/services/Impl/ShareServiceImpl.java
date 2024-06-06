@@ -1,8 +1,11 @@
 package com.muratocal.exchange.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.muratocal.exchange.dtos.ShareDTO;
 import com.muratocal.exchange.models.Share;
 import com.muratocal.exchange.repositories.ShareRepository;
 import com.muratocal.exchange.services.ShareService;
@@ -14,7 +17,11 @@ public class ShareServiceImpl implements ShareService {
     private ShareRepository shareRepository;
 
     @Override
-    public Share saveShare(Share share) {
+    public Share saveShare(ShareDTO shareDTO) {
+        Share share = new Share();
+        share.setSymbol(shareDTO.getSymbol());
+        share.setPrice(shareDTO.getPrice());
+
         return shareRepository.save(share);
     }
 
@@ -24,8 +31,13 @@ public class ShareServiceImpl implements ShareService {
     }
 
     @Override
+    public List<Share> getShares() {
+        return shareRepository.findAll();
+    }
+
+    @Override
     public Share getShareBySymbol(String symbol) {
         return null;
-        //return shareRepository.findSymbol(symbol);
+        // return shareRepository.findSymbol(symbol);
     }
 }

@@ -1,5 +1,7 @@
 package com.muratocal.exchange.controllers.v1;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.muratocal.exchange.dtos.ShareDTO;
 import com.muratocal.exchange.models.Share;
 import com.muratocal.exchange.services.ShareService;
 
@@ -20,7 +23,7 @@ public class ShareController {
     private ShareService shareService;
 
     @PostMapping
-    public ResponseEntity<Share> createShare(@RequestBody Share share) {
+    public ResponseEntity<Share> createShare(@RequestBody ShareDTO share) {
         Share createdShare = shareService.saveShare(share);
         return ResponseEntity.ok(createdShare);
     }
@@ -29,6 +32,12 @@ public class ShareController {
     public ResponseEntity<Share> getShareById(@PathVariable Long id) {
         Share share = shareService.getShareById(id);
         return ResponseEntity.ok(share);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Share>> getShares() {
+        List<Share> shares = shareService.getShares();
+        return ResponseEntity.ok(shares);
     }
 
     @GetMapping("/symbol/{symbol}")
