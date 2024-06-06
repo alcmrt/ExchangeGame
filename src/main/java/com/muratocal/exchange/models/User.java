@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
 @Entity
-//@Table(name = "app_user")
+@Table(name = "app_user")
 public class User {
 
     @Id

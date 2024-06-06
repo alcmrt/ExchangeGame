@@ -4,10 +4,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.muratocal.exchange.models.AppUser;
 import com.muratocal.exchange.models.User;
-//import com.muratocal.exchange.models.User;
+import com.muratocal.exchange.dtos.UserDTO;
 import com.muratocal.exchange.services.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
 
         User createdUser = userService.saveUser(user);
         return ResponseEntity.ok(createdUser);
@@ -42,5 +44,11 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = userService.getUsers();
+        return ResponseEntity.ok(users);
     }
 }
