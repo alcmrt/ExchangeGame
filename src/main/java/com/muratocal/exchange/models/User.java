@@ -1,5 +1,7 @@
 package com.muratocal.exchange.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class User {
     private String name;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Portfolio portfolio;
 
     public String getName() {
