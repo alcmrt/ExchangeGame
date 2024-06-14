@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.muratocal.exchange.dtos.UserCreateDTO;
-import com.muratocal.exchange.dtos.UserDTO;
 import com.muratocal.exchange.models.User;
 import com.muratocal.exchange.repositories.UserRepository;
 import com.muratocal.exchange.services.UserService;
