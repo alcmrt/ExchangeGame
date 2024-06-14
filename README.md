@@ -51,23 +51,23 @@ Exchange is an arbitrarily trading game developed by a startup called “Super T
 1. **Clone the Repository**:
 
    ```sh
-    git clone https://muratocal-admin@bitbucket.org/muratocal/exchangegame.git
+       git clone https://muratocal-admin@bitbucket.org/muratocal/exchangegame.git
    ```
 
 2. **Build Maven Project**:
 
    ```sh
-    ./mvnw clean package -DskipTests
+       ./mvnw clean package -DskipTests
    ```
 
 3. **Run Project Using Docker**:
 
    ```sh
-    docker-compose up --build
+       docker-compose up --build
    ```
 
 4. **Access the API**:
-   The API will be available at http://localhost:8080/swagger-ui/index.html.
+   The API will be available at **http://localhost:8080/swagger-ui/index.html**.
 
 ## Data Initialization
 
