@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "73d2de63-d252-4bc5-b1f9-824bdce84b78",
+		"name": "Exchange API",
+		"description": "POSTMAN collection to test BUY and SELL endpoints of Exchange API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31777986"
+	},
+	"item": [
+		{
+			"name": "Buy Shares",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"BUY\",\r\n  \"quantity\": 1,\r\n  \"price\": 100,\r\n  \"portfolioId\": 1,\r\n  \"shareSymbol\": \"ABC\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trades/buy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trades",
+						"buy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sell Shares",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"SELL\",\r\n  \"quantity\": 1,\r\n  \"price\": 1000,\r\n  \"portfolioId\": 39,\r\n  \"shareSymbol\": \"ABC\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/trades/sell",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"trades",
+						"sell"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
