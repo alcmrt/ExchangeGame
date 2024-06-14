@@ -13,15 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muratocal.exchange.dtos.ShareDTO;
+import com.muratocal.exchange.mappers.ShareMapper;
 import com.muratocal.exchange.models.Share;
 import com.muratocal.exchange.services.ShareService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/shares")
+@Tag(name = "Shares", description = "Share operations")
 public class ShareController {
 
     @Autowired
     private ShareService shareService;
+
+    @Autowired
+    private ShareMapper shareMapper;
 
     @PostMapping
     public ResponseEntity<Share> createShare(@RequestBody ShareDTO share) {
@@ -30,15 +37,19 @@ public class ShareController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Share> getShareById(@PathVariable Long id) {
-        Share share = shareService.getShareById(id);
-        return ResponseEntity.ok(share);
+    public ResponseEntity<?> getShareById(@PathVariable Long id) {
+        try {
+            Share share = shareService.getShareById(id);
+            return ResponseEntity.ok(shareMapper.toShareDTO(share));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<Share>> getShares() {
+    public ResponseEntity<List<ShareDTO>> getShares() {
         List<Share> shares = shareService.getShares();
-        return ResponseEntity.ok(shares);
+        return ResponseEntity.ok(shareMapper.toShareDTOList(shares));
     }
 
     @GetMapping("/symbol/{symbol}")
@@ -46,7 +57,7 @@ public class ShareController {
 
         try {
             Share share = shareService.getShareBySymbol(symbol);
-            return ResponseEntity.ok(share);
+            return ResponseEntity.ok(shareMapper.toShareDTO(share));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

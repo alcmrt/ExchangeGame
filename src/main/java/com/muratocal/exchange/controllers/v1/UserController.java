@@ -4,8 +4,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.muratocal.exchange.models.AppUser;
 import com.muratocal.exchange.models.User;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.muratocal.exchange.dtos.UserCreateDTO;
 import com.muratocal.exchange.dtos.UserDTO;
+import com.muratocal.exchange.mappers.UserMapper;
 import com.muratocal.exchange.services.UserService;
+import com.muratocal.exchange.views.View;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -28,8 +32,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
+    public ResponseEntity<User> createUser(@RequestBody UserCreateDTO user) {
 
         User createdUser = userService.saveUser(user);
         return ResponseEntity.ok(createdUser);
@@ -40,15 +47,15 @@ public class UserController {
 
         try {
             User user = userService.getUserById(id);
-            return ResponseEntity.ok(user);
+            return ResponseEntity.ok(userMapper.toUserDTO(user));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserDTO>> getUsers() {
         List<User> users = userService.getUsers();
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(userMapper.toUserDTOList(users));
     }
 }
