@@ -105,7 +105,10 @@ The DataInitialization class in the config package initializes the database with
 
 ### Using Postman
 
-1. **Import the Collection:** Import the provided Postman collection file to test the API endpoints.
+1. **Import the Collection:**
+
+   - Import the provided Postman collection file to test the API endpoints.
+   - You can find the collection under resources.
 
 2. **Set Environment Variables:** Ensure the Postman environment is configured with the correct base URL and other necessary variables.
 
