@@ -2,14 +2,11 @@ package com.muratocal.exchange.controllers.v1;
 
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.muratocal.exchange.models.AppUser;
 import com.muratocal.exchange.models.User;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.muratocal.exchange.dtos.UserCreateDTO;
 import com.muratocal.exchange.dtos.UserDTO;
 import com.muratocal.exchange.mappers.UserMapper;
 import com.muratocal.exchange.services.UserService;
-import com.muratocal.exchange.views.View;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
