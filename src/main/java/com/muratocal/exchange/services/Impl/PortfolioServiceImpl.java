@@ -1,9 +1,11 @@
 package com.muratocal.exchange.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.muratocal.exchange.dtos.PortfolioDTO;
+import com.muratocal.exchange.dtos.PortfolioCreateDTO;
 import com.muratocal.exchange.models.Portfolio;
 import com.muratocal.exchange.models.User;
 import com.muratocal.exchange.repositories.PortfolioRepository;
@@ -20,9 +22,9 @@ public class PortfolioServiceImpl implements PortfolioService {
     private UserService userService;
 
     @Override
-    public Portfolio savePortfolio(PortfolioDTO portfolioDTO) {
+    public Portfolio savePortfolio(PortfolioCreateDTO portfolioCreateDTO) {
         Portfolio portfolio = new Portfolio();
-        User user = userService.getUserById(portfolioDTO.getUserId());
+        User user = userService.getUserById(portfolioCreateDTO.getUserId());
         portfolio.setUser(user);
 
         return portfolioRepository.save(portfolio);
@@ -31,5 +33,10 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Override
     public Portfolio getPortfolioById(Long id) {
         return portfolioRepository.findById(id).orElseThrow(() -> new RuntimeException("Portfolio not found."));
+    }
+
+    @Override
+    public List<Portfolio> getPortfolios() {
+        return portfolioRepository.findAll();
     }
 }

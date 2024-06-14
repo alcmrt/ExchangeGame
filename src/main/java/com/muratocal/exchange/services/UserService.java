@@ -2,12 +2,12 @@ package com.muratocal.exchange.services;
 
 import java.util.List;
 
-import com.muratocal.exchange.dtos.UserDTO;
+import com.muratocal.exchange.dtos.UserCreateDTO;
 import com.muratocal.exchange.models.User;
 
 public interface UserService {
 
-    User saveUser(UserDTO user);
+    User saveUser(UserCreateDTO user);
 
     User getUserById(Long id);
 

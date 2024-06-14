@@ -1,5 +1,6 @@
 package com.muratocal.exchange.services.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,12 @@ public class TradeServiceImpl implements TradeService {
 
     @Override
     @Transactional
-    public Trade buyShare(Long portfolioId, String symbol, Integer quantity) {
+    public Trade buyShare(Long portfolioId, String shareSymbol, Integer quantity, BigDecimal price) {
 
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
 
-        // Share share = shareRepository.findSymbol(symbol);
-        Share share = null;
-
+        Share share = shareRepository.findBySymbol(shareSymbol);
         if (share == null) {
             throw new RuntimeException("Share not found");
         }
@@ -46,6 +45,7 @@ public class TradeServiceImpl implements TradeService {
         trade.setQuantity(quantity);
         trade.setPortfolio(portfolio);
         trade.setShare(share);
+        trade.setPrice(price);
 
         return tradeRepository.save(trade);
 
@@ -54,13 +54,12 @@ public class TradeServiceImpl implements TradeService {
 
     @Override
     @Transactional
-    public Trade sellShare(Long portfolioId, String symbol, Integer quantity) {
+    public Trade sellShare(Long portfolioId, String shareSymbol, Integer quantity) {
 
         Portfolio portfolio = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
 
-        // Share share = shareRepository.findSymbol(symbol);
-        Share share = null;
+        Share share = shareRepository.findBySymbol(shareSymbol);
 
         if (share == null) {
             throw new RuntimeException("Share not found");
@@ -92,6 +91,11 @@ public class TradeServiceImpl implements TradeService {
     public Trade getTradeById(Long id) {
         return tradeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Trade not found"));
+    }
+
+    @Override
+    public List<Trade> getTrades() {
+        return tradeRepository.findAll();
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.muratocal.exchange.dtos.UserCreateDTO;
 import com.muratocal.exchange.dtos.UserDTO;
 import com.muratocal.exchange.models.User;
 import com.muratocal.exchange.repositories.UserRepository;
@@ -17,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User saveUser(UserDTO userDTO) {
+    public User saveUser(UserCreateDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
 
