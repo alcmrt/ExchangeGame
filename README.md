@@ -25,10 +25,13 @@ Exchange is an arbitrarily trading game developed by a startup called “Super T
    - Users must have a registered portfolio before they can trade shares.
 
 3. **Trading Operations**:
+
    - **BUY**:
+
      - The purchase rate should be the latest price in the database.
      - The share must be registered; otherwise, it is a bad request.
      - The user's portfolio must be registered; otherwise, it is a bad request.
+
    - **SELL**:
      - The share must be in the user's portfolio.
      - The user's portfolio must be registered; otherwise, it is a bad request.
@@ -48,19 +51,19 @@ Exchange is an arbitrarily trading game developed by a startup called “Super T
 1. **Clone the Repository**:
 
    ```sh
-   git clone https://muratocal-admin@bitbucket.org/muratocal/exchangegame.git
+    git clone https://muratocal-admin@bitbucket.org/muratocal/exchangegame.git
    ```
 
 2. **Build Maven Project**:
 
    ```sh
-   ./mvnw clean package -DskipTests
+    ./mvnw clean package -DskipTests
    ```
 
 3. **Run Project Using Docker**:
 
    ```sh
-   docker-compose up --build
+    docker-compose up --build
    ```
 
 4. **Access the API**:
