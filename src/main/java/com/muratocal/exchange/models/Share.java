@@ -1,7 +1,9 @@
 package com.muratocal.exchange.models;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "id")
 public class Share {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +26,8 @@ public class Share {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "share", cascade = CascadeType.ALL)
-    private Set<Trade> trades;
+    @JsonManagedReference(value = "share-trades")
+    private List<Trade> trades;
 
     public Long getId() {
         return id;
@@ -48,11 +53,11 @@ public class Share {
         this.price = price;
     }
 
-    public Set<Trade> getTrades() {
+    public List<Trade> getTrades() {
         return trades;
     }
 
-    public void setTrades(Set<Trade> trades) {
+    public void setTrades(List<Trade> trades) {
         this.trades = trades;
     }
 

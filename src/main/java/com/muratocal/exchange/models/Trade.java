@@ -2,6 +2,8 @@ package com.muratocal.exchange.models;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "id")
 public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +24,12 @@ public class Trade {
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
+    @JsonBackReference
     private Portfolio portfolio;
 
     @ManyToOne
     @JoinColumn(name = "share_id")
+    @JsonBackReference(value = "share-trades")
     private Share share;
 
     public String getType() {

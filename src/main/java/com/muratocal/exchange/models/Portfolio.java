@@ -1,8 +1,9 @@
 package com.muratocal.exchange.models;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,7 +26,8 @@ public class Portfolio {
     private User user;
 
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private Set<Trade> trades;
+    @JsonManagedReference
+    private List<Trade> trades;
 
     public Long getId() {
         return id;
@@ -43,11 +45,11 @@ public class Portfolio {
         this.user = user;
     }
 
-    public Set<Trade> getTrades() {
+    public List<Trade> getTrades() {
         return trades;
     }
 
-    public void setTrades(Set<Trade> trades) {
+    public void setTrades(List<Trade> trades) {
         this.trades = trades;
     }
 
